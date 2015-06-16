@@ -175,6 +175,11 @@
 				TargetAttributes = {
 					BB9F69501B2EB311000C3EB5 = {
 						CreatedOnToolsVersion = 7.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -379,6 +384,7 @@
 				BB9F69801B2EB312000C3EB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
