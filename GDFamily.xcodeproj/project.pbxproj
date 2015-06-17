@@ -27,6 +27,17 @@
 		BB9F69A11B2EBF54000C3EB5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9F69A01B2EBF54000C3EB5 /* libz.dylib */; };
 		BB9F69A31B2EC94B000C3EB5 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9F69A21B2EC94B000C3EB5 /* libstdc++.6.0.9.dylib */; };
 		BB9F69A51B2ECA31000C3EB5 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69A41B2ECA31000C3EB5 /* AMap.bundle */; };
+		BB9F69A91B316FF2000C3EB5 /* GDFSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9F69A81B316FF2000C3EB5 /* GDFSearchBar.m */; };
+		BB9F69B51B3181B4000C3EB5 /* NavBarIconSearch_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69AB1B3181B4000C3EB5 /* NavBarIconSearch_blue.png */; };
+		BB9F69B61B3181B4000C3EB5 /* NavBarIconSearch_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69AC1B3181B4000C3EB5 /* NavBarIconSearch_blue@2x.png */; };
+		BB9F69B71B3181B4000C3EB5 /* NavBarIconSearch_white.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69AD1B3181B4000C3EB5 /* NavBarIconSearch_white.png */; };
+		BB9F69B81B3181B4000C3EB5 /* NavBarIconSearch_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69AE1B3181B4000C3EB5 /* NavBarIconSearch_white@2x.png */; };
+		BB9F69B91B3181B4000C3EB5 /* NavBarIconSearchBar2_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69AF1B3181B4000C3EB5 /* NavBarIconSearchBar2_blue.png */; };
+		BB9F69BA1B3181B4000C3EB5 /* NavBarIconSearchBar2_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B01B3181B4000C3EB5 /* NavBarIconSearchBar2_blue@2x.png */; };
+		BB9F69BB1B3181B4000C3EB5 /* NavBarIconSearchBar_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B11B3181B4000C3EB5 /* NavBarIconSearchBar_blue.png */; };
+		BB9F69BC1B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B21B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png */; };
+		BB9F69BD1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B31B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png */; };
+		BB9F69BE1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B41B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +66,18 @@
 		BB9F69A01B2EBF54000C3EB5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = ../../../../../../../usr/lib/libz.dylib; sourceTree = "<group>"; };
 		BB9F69A21B2EC94B000C3EB5 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
 		BB9F69A41B2ECA31000C3EB5 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = AMap/MAMapKit.framework/Versions/2.5.0.ce99742/Resources/AMap.bundle; sourceTree = "<group>"; };
+		BB9F69A71B316FF2000C3EB5 /* GDFSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDFSearchBar.h; sourceTree = "<group>"; };
+		BB9F69A81B316FF2000C3EB5 /* GDFSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDFSearchBar.m; sourceTree = "<group>"; };
+		BB9F69AB1B3181B4000C3EB5 /* NavBarIconSearch_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarIconSearch_blue.png; sourceTree = "<group>"; };
+		BB9F69AC1B3181B4000C3EB5 /* NavBarIconSearch_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearch_blue@2x.png"; sourceTree = "<group>"; };
+		BB9F69AD1B3181B4000C3EB5 /* NavBarIconSearch_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarIconSearch_white.png; sourceTree = "<group>"; };
+		BB9F69AE1B3181B4000C3EB5 /* NavBarIconSearch_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearch_white@2x.png"; sourceTree = "<group>"; };
+		BB9F69AF1B3181B4000C3EB5 /* NavBarIconSearchBar2_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarIconSearchBar2_blue.png; sourceTree = "<group>"; };
+		BB9F69B01B3181B4000C3EB5 /* NavBarIconSearchBar2_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearchBar2_blue@2x.png"; sourceTree = "<group>"; };
+		BB9F69B11B3181B4000C3EB5 /* NavBarIconSearchBar_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarIconSearchBar_blue.png; sourceTree = "<group>"; };
+		BB9F69B21B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearchBar_blue@2x.png"; sourceTree = "<group>"; };
+		BB9F69B31B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarIconSearchCircle_blue.png; sourceTree = "<group>"; };
+		BB9F69B41B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearchCircle_blue@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +120,8 @@
 				BB9F69901B2EBBDA000C3EB5 /* CoreGraphics.framework */,
 				BB9F698E1B2EBBD3000C3EB5 /* Foundation.framework */,
 				BB9F698C1B2EBBC9000C3EB5 /* UIKit.framework */,
+				BB9F69AA1B3181B4000C3EB5 /* images */,
+				BB9F69A61B316FBF000C3EB5 /* View */,
 				BB9F69871B2EBBA7000C3EB5 /* AMap */,
 				BB9F69531B2EB311000C3EB5 /* GDFamily */,
 				BB9F69521B2EB311000C3EB5 /* Products */,
@@ -142,6 +167,32 @@
 				BB9F69891B2EBBA7000C3EB5 /* MAMapKit.framework */,
 			);
 			path = AMap;
+			sourceTree = "<group>";
+		};
+		BB9F69A61B316FBF000C3EB5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB9F69A71B316FF2000C3EB5 /* GDFSearchBar.h */,
+				BB9F69A81B316FF2000C3EB5 /* GDFSearchBar.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BB9F69AA1B3181B4000C3EB5 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				BB9F69AB1B3181B4000C3EB5 /* NavBarIconSearch_blue.png */,
+				BB9F69AC1B3181B4000C3EB5 /* NavBarIconSearch_blue@2x.png */,
+				BB9F69AD1B3181B4000C3EB5 /* NavBarIconSearch_white.png */,
+				BB9F69AE1B3181B4000C3EB5 /* NavBarIconSearch_white@2x.png */,
+				BB9F69AF1B3181B4000C3EB5 /* NavBarIconSearchBar2_blue.png */,
+				BB9F69B01B3181B4000C3EB5 /* NavBarIconSearchBar2_blue@2x.png */,
+				BB9F69B11B3181B4000C3EB5 /* NavBarIconSearchBar_blue.png */,
+				BB9F69B21B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png */,
+				BB9F69B31B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png */,
+				BB9F69B41B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,7 +258,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB9F69A51B2ECA31000C3EB5 /* AMap.bundle in Resources */,
+				BB9F69B61B3181B4000C3EB5 /* NavBarIconSearch_blue@2x.png in Resources */,
+				BB9F69B91B3181B4000C3EB5 /* NavBarIconSearchBar2_blue.png in Resources */,
+				BB9F69BD1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png in Resources */,
+				BB9F69B71B3181B4000C3EB5 /* NavBarIconSearch_white.png in Resources */,
+				BB9F69B81B3181B4000C3EB5 /* NavBarIconSearch_white@2x.png in Resources */,
+				BB9F69BC1B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png in Resources */,
 				BB9F69641B2EB311000C3EB5 /* LaunchScreen.storyboard in Resources */,
+				BB9F69BB1B3181B4000C3EB5 /* NavBarIconSearchBar_blue.png in Resources */,
+				BB9F69BE1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png in Resources */,
+				BB9F69BA1B3181B4000C3EB5 /* NavBarIconSearchBar2_blue@2x.png in Resources */,
+				BB9F69B51B3181B4000C3EB5 /* NavBarIconSearch_blue.png in Resources */,
 				BB9F69611B2EB311000C3EB5 /* Assets.xcassets in Resources */,
 				BB9F695F1B2EB311000C3EB5 /* Main.storyboard in Resources */,
 			);
@@ -221,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB9F695C1B2EB311000C3EB5 /* ViewController.m in Sources */,
+				BB9F69A91B316FF2000C3EB5 /* GDFSearchBar.m in Sources */,
 				BB9F69591B2EB311000C3EB5 /* AppDelegate.m in Sources */,
 				BB9F69561B2EB311000C3EB5 /* main.m in Sources */,
 			);
