@@ -7,10 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <MAMapKit/MAMapKit.h>
-#import "ViewController.h"
+#import "RootVC.h"
 
-static NSString *const MAapAPIKey = @"71cdae436560a34a8ee58a5a53d71711";
 @interface AppDelegate ()
 
 @end
@@ -21,9 +19,10 @@ static NSString *const MAapAPIKey = @"71cdae436560a34a8ee58a5a53d71711";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    [MAMapServices sharedServices].apiKey = MAapAPIKey;
-    ViewController *mainVC = [[ViewController alloc]init];
-    self.window.rootViewController = mainVC;
+    RootVC *rootVC = [[RootVC alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootVC];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

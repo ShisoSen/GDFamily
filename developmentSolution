@@ -1,0 +1,11 @@
+1. 设置status bar 为白色
+	1.修改plist 属性 View controller-based status bar appearance 为 NO；
+	2.调用[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+2. UINavigationController的navigationBar 设置为白色
+	－设置tintcolor
+	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7){
+        self.navigationController.navigationBar.barTintColor = [UIColor redColor];
+    }
+    self.navigationController.navigationBar.tintColor = [UIColor redColor];
+

@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  RootVC.h
 //  GDFamily
 //
-//  Created by Sicong Qian on 15/6/15.
+//  Created by Sicong Qian on 15/6/18.
 //  Copyright © 2015年 silverup.co. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
+#import "GDFBaseVC.h"
+@interface RootVC :GDFBaseVC
 
 @end
-
