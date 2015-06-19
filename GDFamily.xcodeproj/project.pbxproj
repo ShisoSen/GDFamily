@@ -10,6 +10,7 @@
 		BB9530171B32788800CFC0B8 /* RootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9530161B32788800CFC0B8 /* RootVC.m */; };
 		BB95301A1B3279F000CFC0B8 /* GDFBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9530191B3279F000CFC0B8 /* GDFBaseVC.m */; };
 		BB95301C1B32A1E700CFC0B8 /* title_bar_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB95301B1B32A1E700CFC0B8 /* title_bar_add@2x.png */; };
+		BB9530241B33C93D00CFC0B8 /* GDFSlideController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9530231B33C93D00CFC0B8 /* GDFSlideController.m */; };
 		BB9F69561B2EB311000C3EB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9F69551B2EB311000C3EB5 /* main.m */; };
 		BB9F69591B2EB311000C3EB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9F69581B2EB311000C3EB5 /* AppDelegate.m */; };
 		BB9F69611B2EB311000C3EB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69601B2EB311000C3EB5 /* Assets.xcassets */; };
@@ -47,6 +48,8 @@
 		BB9530181B3279F000CFC0B8 /* GDFBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDFBaseVC.h; sourceTree = "<group>"; };
 		BB9530191B3279F000CFC0B8 /* GDFBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDFBaseVC.m; sourceTree = "<group>"; };
 		BB95301B1B32A1E700CFC0B8 /* title_bar_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_bar_add@2x.png"; sourceTree = "<group>"; };
+		BB9530221B33C93D00CFC0B8 /* GDFSlideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDFSlideController.h; sourceTree = "<group>"; };
+		BB9530231B33C93D00CFC0B8 /* GDFSlideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDFSlideController.m; sourceTree = "<group>"; };
 		BB9F69511B2EB311000C3EB5 /* GDFamily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDFamily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB9F69551B2EB311000C3EB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BB9F69571B2EB311000C3EB5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 			children = (
 				BB9F69A71B316FF2000C3EB5 /* GDFSearchBar.h */,
 				BB9F69A81B316FF2000C3EB5 /* GDFSearchBar.m */,
+				BB9530221B33C93D00CFC0B8 /* GDFSlideController.h */,
+				BB9530231B33C93D00CFC0B8 /* GDFSlideController.m */,
 			);
 			name = unitView;
 			path = View;
@@ -304,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB9530171B32788800CFC0B8 /* RootVC.m in Sources */,
+				BB9530241B33C93D00CFC0B8 /* GDFSlideController.m in Sources */,
 				BB9F69A91B316FF2000C3EB5 /* GDFSearchBar.m in Sources */,
 				BB9F69591B2EB311000C3EB5 /* AppDelegate.m in Sources */,
 				BB95301A1B3279F000CFC0B8 /* GDFBaseVC.m in Sources */,
