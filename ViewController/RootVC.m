@@ -8,16 +8,6 @@
 
 #import "RootVC.h"
 #import "GDFSearchBar.h"
-
-#ifndef __OPTIMIZE__
-#define NSLog(...) NSLog(__VA_ARGS__)
-#define lg NSLog(@"%s",__func__)
-#define lf(x) NSLog(@"%s : %@",#x,x)
-#else
-#define NSLog(...) {}
-#define lg {}
-#define lf(x) {}
-#endif
 @interface RootVC ()
 
 @end
@@ -25,7 +15,7 @@
 @implementation RootVC
 
 -(void)_setup{
-
+    self.view.backgroundColor = [UIColor yellowColor];
 }
 
 - (void)viewDidLoad {
@@ -36,5 +26,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -GDFSlideControllerStatus
+- (void)slideControllerWillOpen:(GDFSlideController *)slideController{
+    lg;
+}
+- (void)slideControllerDidOpen:(GDFSlideController *)slideController{
+    lg;
+}
+- (void)slideControllerWillClose:(GDFSlideController *)slideController{
+    lg;
+}
+- (void)slideControllerDidClose:(GDFSlideController *)slideController{
+    lg;
 }
 @end

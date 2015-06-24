@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RootVC.h"
+#import "LeftVC.h"
 
 @interface AppDelegate ()
 
@@ -19,8 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    RootVC *rootVC = [[RootVC alloc]init];
+    LeftVC *left = [[LeftVC alloc]init];
+    RootVC *center = [[RootVC alloc]init];
+    GDFSlideController *rootVC = [[GDFSlideController alloc]initWithLeftViewController:left centerViewController:center];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootVC];
+    [nav setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];

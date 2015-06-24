@@ -8,21 +8,14 @@
 
 #import "GDFSlideController.h"
 
-static const CGFloat kICSDrawerControllerDrawerDepth = 260.0f;
-static const CGFloat kICSDrawerControllerLeftViewInitialOffset = -60.0f;
-static const NSTimeInterval kICSDrawerControllerAnimationDuration = 0.5;
-static const CGFloat kICSDrawerControllerOpeningAnimationSpringDamping = 0.7f;
-static const CGFloat kICSDrawerControllerOpeningAnimationSpringInitialVelocity = 0.1f;
-static const CGFloat kICSDrawerControllerClosingAnimationSpringDamping = 1.0f;
-static const CGFloat kICSDrawerControllerClosingAnimationSpringInitialVelocity = 0.5f;
+const CGFloat kGDFDrawerControllerLeftViewInitialOffset = -60.0f;
+static CGFloat kGDFDrawerControllerDrawerDepth = 260.0f;
+static const NSTimeInterval kGDFDrawerControllerAnimationDuration = 0.5;
+static const CGFloat kGDFDrawerControllerOpeningAnimationSpringDamping = 0.7f;
+static const CGFloat kGDFDrawerControllerOpeningAnimationSpringInitialVelocity = 0.1f;
+static const CGFloat kGDFDrawerControllerClosingAnimationSpringDamping = 1.0f;
+static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity = 0.5f;
 
-typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
-{
-    ICSDrawerControllerStateClosed = 0,
-    ICSDrawerControllerStateOpening,
-    ICSDrawerControllerStateOpen,
-    ICSDrawerControllerStateClosing
-};
 
 @interface GDFSlideController () <UIGestureRecognizerDelegate>
 
@@ -41,9 +34,9 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
 
 @synthesize leftViewController,centerViewController;
 
-- (id)initWithLeftViewController:(UIViewController *)leftViewController_
-            centerViewController:(UIViewController *)centerViewController_{
-    if (leftViewController_&&centerViewController_) {
+- (id)initWithLeftViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)leftViewController_
+            centerViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)centerViewController_{
+    if (!leftViewController_||!centerViewController_) {
         NSLog(@"do not accept nil params.");
         return nil;
     }
@@ -51,10 +44,83 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
     if (self) {
         leftViewController = leftViewController_;
         centerViewController = centerViewController_;
+        
+        kGDFDrawerControllerDrawerDepth = [UIScreen mainScreen].bounds.size.width + kGDFDrawerControllerLeftViewInitialOffset;
+        
+        if ([leftViewController respondsToSelector:@selector(setSliderController:)]) {
+            leftViewController.sliderController = self;
+        }
+        if ([centerViewController respondsToSelector:@selector(setSliderController:)]) {
+            centerViewController.sliderController = self;
+        }
     }
     return self;
 }
+#pragma mark - Reloading/Replacing the center view controller
 
+- (void)reloadCenterViewControllerUsingBlock:(void (^)(void))reloadBlock
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateOpen);
+    NSParameterAssert(centerViewController);
+    
+    [self willClose];
+    
+    CGRect f = centerView.frame;
+    f.origin.x = self.view.bounds.size.width;
+    
+    [UIView animateWithDuration: kGDFDrawerControllerAnimationDuration / 2
+                     animations:^{
+                         centerView.frame = f;
+                     }
+                     completion:^(BOOL finished) {
+                         // The center view controller is now out of sight
+                         if (reloadBlock) {
+                             reloadBlock();
+                         }
+                         // Finally, close the drawer
+                         [self animateClosing];
+                     }];
+}
+
+- (void)replaceCenterViewControllerWithViewController:(UIViewController *)viewController{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateOpen);
+    NSParameterAssert(viewController);
+    NSParameterAssert(centerView);
+    NSParameterAssert(centerViewController);
+    
+    [self willClose];
+    
+    CGRect f = centerView.frame;
+    f.origin.x = self.view.bounds.size.width;
+    
+    [centerViewController willMoveToParentViewController:nil];
+    [UIView animateWithDuration: kGDFDrawerControllerAnimationDuration / 2
+                     animations:^{
+                         centerView.frame = f;
+                     }
+                     completion:^(BOOL finished) {
+                         // The center view controller is now out of sight
+                         
+                         // Remove the current center view controller from the container
+                         if ([centerViewController respondsToSelector:@selector(setSliderController:)]) {
+                             centerViewController.sliderController = nil;
+                         }
+                         [centerViewController.view removeFromSuperview];
+                         [centerViewController removeFromParentViewController];
+                         
+                         // Set the new center view controller
+                         centerViewController = viewController;
+                         if ([centerViewController respondsToSelector:@selector(setSliderController:)]) {
+                             centerViewController.sliderController = self;
+                         }
+                         
+                         // Add the new center view controller to the container
+                         [self addCenterViewController];
+                         
+                         // Finally, close the drawer
+                         [self animateClosing];
+                     }];
+}
 - (void)addCenterViewController{
     [self addChildViewController:self.centerViewController];
     self.centerViewController.view.frame = self.view.bounds;
@@ -69,20 +135,27 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
     
     [centerView addGestureRecognizer:panGestureRecognizer];
 }
-- (void)tapGestureRecognized:(UITapGestureRecognizer *)tapGestureRecognizer{
+- (void)tapGestureRecognized:(UITapGestureRecognizer *)tapGestureRecognizer_{
+    if (tapGestureRecognizer_.state == UIGestureRecognizerStateEnded) {
+        [self close];
+    }
+}
+- (void)removeClosingGestureRecognizers
+{
+    NSParameterAssert(centerView);
+    NSParameterAssert(panGestureRecognizer);
+    
+    [centerView removeGestureRecognizer:tapGestureRecognizer];
 }
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-        NSLog(@"is not a UIPanGestureRecognizer.");
-        return NO;
-    }
+    NSParameterAssert([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]);
     NSParameterAssert([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]);
     CGPoint velocity = [(UIPanGestureRecognizer *)gestureRecognizer velocityInView:self.view];
     
-    if (self.drawerState == ICSDrawerControllerStateClosed && velocity.x > 0.0f) {
+    if (self.drawerState == GDFDrawerControllerStateClosed && velocity.x > 0.0f) {
         return YES;
     }
-    else if (self.drawerState == ICSDrawerControllerStateOpen && velocity.x < 0.0f) {
+    else if (self.drawerState == GDFDrawerControllerStateOpen && velocity.x < 0.0f) {
         return YES;
     }
     
@@ -96,8 +169,8 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
     switch (state) {
             
         case UIGestureRecognizerStateBegan:
-            self.panGestureStartLocation = location;
-            if (self.drawerState == ICSDrawerControllerStateClosed) {
+            panGestureStartLocation = location;
+            if (self.drawerState == GDFDrawerControllerStateClosed) {
                 [self willOpen];
             }
             else {
@@ -108,43 +181,43 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
         case UIGestureRecognizerStateChanged:
         {
             CGFloat delta = 0.0f;
-            if (self.drawerState == ICSDrawerControllerStateOpening) {
-                delta = location.x - self.panGestureStartLocation.x;
+            if (self.drawerState == GDFDrawerControllerStateOpening) {
+                delta = location.x - panGestureStartLocation.x;
             }
-            else if (self.drawerState == ICSDrawerControllerStateClosing) {
-                delta = kICSDrawerControllerDrawerDepth - (self.panGestureStartLocation.x - location.x);
+            else if (self.drawerState == GDFDrawerControllerStateClosing) {
+                delta = kGDFDrawerControllerDrawerDepth - (panGestureStartLocation.x - location.x);
             }
             
-            CGRect l = self.leftView.frame;
-            CGRect c = self.centerView.frame;
-            if (delta > kICSDrawerControllerDrawerDepth) {
+            CGRect l = leftView.frame;
+            CGRect c = centerView.frame;
+            if (delta > kGDFDrawerControllerDrawerDepth) {
                 l.origin.x = 0.0f;
-                c.origin.x = kICSDrawerControllerDrawerDepth;
+                c.origin.x = kGDFDrawerControllerDrawerDepth;
             }
             else if (delta < 0.0f) {
-                l.origin.x = kICSDrawerControllerLeftViewInitialOffset;
+                l.origin.x = kGDFDrawerControllerLeftViewInitialOffset;
                 c.origin.x = 0.0f;
             }
             else {
-                // While the centerView can move up to kICSDrawerControllerDrawerDepth points, to achieve a parallax effect
-                // the leftView has move no more than kICSDrawerControllerLeftViewInitialOffset points
-                l.origin.x = kICSDrawerControllerLeftViewInitialOffset
-                - (delta * kICSDrawerControllerLeftViewInitialOffset) / kICSDrawerControllerDrawerDepth;
+                // While the centerView can move up to kGDFDrawerControllerDrawerDepth points, to achieve a parallax effect
+                // the leftView has move no more than kGDFDrawerControllerLeftViewInitialOffset points
+                l.origin.x = kGDFDrawerControllerLeftViewInitialOffset
+                - (delta * kGDFDrawerControllerLeftViewInitialOffset) / kGDFDrawerControllerDrawerDepth;
                 
                 c.origin.x = delta;
             }
             
-            self.leftView.frame = l;
-            self.centerView.frame = c;
+            leftView.frame = l;
+            centerView.frame = c;
             
             break;
         }
             
         case UIGestureRecognizerStateEnded:
             
-            if (self.drawerState == ICSDrawerControllerStateOpening) {
-                CGFloat centerViewLocation = self.centerView.frame.origin.x;
-                if (centerViewLocation == kICSDrawerControllerDrawerDepth) {
+            if (self.drawerState == GDFDrawerControllerStateOpening) {
+                CGFloat centerViewLocation = centerView.frame.origin.x;
+                if (centerViewLocation == kGDFDrawerControllerDrawerDepth) {
                     // Open the drawer without animation, as it has already being dragged in its final position
                     [self setNeedsStatusBarAppearanceUpdate];
                     [self didOpen];
@@ -162,8 +235,8 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
                     [self animateClosing];
                 }
                 
-            } else if (self.drawerState == ICSDrawerControllerStateClosing) {
-                CGFloat centerViewLocation = self.centerView.frame.origin.x;
+            } else if (self.drawerState == GDFDrawerControllerStateClosing) {
+                CGFloat centerViewLocation = centerView.frame.origin.x;
                 if (centerViewLocation == 0.0f) {
                     // Close the drawer without animation, as it has already being dragged in its final position
                     [self setNeedsStatusBarAppearanceUpdate];
@@ -182,9 +255,9 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
                     // Here we save the current position for the leftView since
                     // we want the opening animation to start from the current position
                     // and not the one that is set in 'willOpen'
-                    CGRect l = self.leftView.frame;
+                    CGRect l = leftView.frame;
                     [self willOpen];
-                    self.leftView.frame = l;
+                    leftView.frame = l;
                     
                     [self animateOpening];
                 }
@@ -195,7 +268,178 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
             break;
     }
 }
-
+- (void)addClosingGestureRecognizers
+{
+    NSParameterAssert(centerView);
+    NSParameterAssert(panGestureRecognizer);
+    
+    [centerView addGestureRecognizer:tapGestureRecognizer];
+}
+#pragma mark -SlideControllerStatus
+- (void)willOpen
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateClosed);
+    NSParameterAssert(leftView);
+    NSParameterAssert(centerView);
+    NSParameterAssert(leftViewController);
+    NSParameterAssert(centerViewController);
+    
+    // Keep track that the drawer is opening
+    self.drawerState = GDFDrawerControllerStateOpening;
+    
+    // Position the left view
+    CGRect f = self.view.bounds;
+    f.origin.x = kGDFDrawerControllerLeftViewInitialOffset;
+    NSParameterAssert(f.origin.x < 0.0f);
+    leftView.frame = f;
+    
+    // Start adding the left view controller to the container
+    [self addChildViewController:leftViewController];
+    leftViewController.view.frame = leftView.bounds;
+    [leftView addSubview:leftViewController.view];
+    
+    // Add the left view to the view hierarchy
+    [self.view insertSubview:leftView belowSubview:centerView];
+    
+    // Notify the child view controllers that the drawer is about to open
+    if ([leftViewController respondsToSelector:@selector(slideControllerWillOpen:)]) {
+        [leftViewController slideControllerWillOpen:self];
+    }
+    if ([centerViewController respondsToSelector:@selector(slideControllerWillOpen:)]) {
+        [centerViewController slideControllerWillOpen:self];
+    }
+}
+- (void)didOpen
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateOpening);
+    NSParameterAssert(leftViewController);
+    NSParameterAssert(centerViewController);
+    
+    // Complete adding the left controller to the container
+    [self.leftViewController didMoveToParentViewController:self];
+    
+    [self addClosingGestureRecognizers];
+    
+    // Keep track that the drawer is open
+    self.drawerState = GDFDrawerControllerStateOpen;
+    
+    // Notify the child view controllers that the drawer is open
+    if ([leftViewController respondsToSelector:@selector(slideControllerDidOpen:)]) {
+        [leftViewController slideControllerDidOpen:self];
+    }
+    if ([centerViewController respondsToSelector:@selector(slideControllerDidOpen:)]) {
+        [centerViewController slideControllerDidOpen:self];
+    }
+}
+- (void)willClose
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateOpen);
+    NSParameterAssert(leftViewController);
+    NSParameterAssert(centerViewController);
+    
+    // Start removing the left controller from the container
+    [self.leftViewController willMoveToParentViewController:nil];
+    
+    // Keep track that the drawer is closing
+    self.drawerState = GDFDrawerControllerStateClosing;
+    
+    // Notify the child view controllers that the drawer is about to close
+    if ([leftViewController respondsToSelector:@selector(slideControllerWillClose:)]) {
+        [leftViewController slideControllerWillClose:self];
+    }
+    if ([centerViewController respondsToSelector:@selector(slideControllerWillClose:)]) {
+        [centerViewController slideControllerWillClose:self];
+    }
+}
+- (void)close
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateOpen);
+    
+    [self willClose];
+    
+    [self animateClosing];
+}
+- (void)didClose
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateClosing);
+    NSParameterAssert(leftView);
+    NSParameterAssert(centerView);
+    NSParameterAssert(leftViewController);
+    NSParameterAssert(centerViewController);
+    
+    // Complete removing the left view controller from the container
+    [self.leftViewController.view removeFromSuperview];
+    [self.leftViewController removeFromParentViewController];
+    
+    // Remove the left view from the view hierarchy
+    [leftView removeFromSuperview];
+    
+    [self removeClosingGestureRecognizers];
+    
+    // Keep track that the drawer is closed
+    self.drawerState = GDFDrawerControllerStateClosed;
+    
+    // Notify the child view controllers that the drawer is closed
+    if ([leftViewController respondsToSelector:@selector(slideControllerDidClose:)]) {
+        [leftViewController slideControllerDidClose:self];
+    }
+    if ([centerViewController respondsToSelector:@selector(slideControllerDidClose:)]) {
+        [centerViewController slideControllerDidClose:self];
+    }
+}
+#pragma mark - Animations
+- (void)animateOpening
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateOpening);
+    NSParameterAssert(leftView);
+    NSParameterAssert(centerView);
+    
+    // Calculate the final frames for the container views
+    CGRect leftViewFinalFrame = self.view.bounds;
+    CGRect centerViewFinalFrame = self.view.bounds;
+    centerViewFinalFrame.origin.x = kGDFDrawerControllerDrawerDepth;
+    
+    [UIView animateWithDuration:kGDFDrawerControllerAnimationDuration
+                          delay:0
+         usingSpringWithDamping:kGDFDrawerControllerOpeningAnimationSpringDamping
+          initialSpringVelocity:kGDFDrawerControllerOpeningAnimationSpringInitialVelocity
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         centerView.frame = centerViewFinalFrame;
+                         leftView.frame = leftViewFinalFrame;
+                         
+                         [self setNeedsStatusBarAppearanceUpdate];
+                     }
+                     completion:^(BOOL finished) {
+                         [self didOpen];
+                     }];
+}
+- (void)animateClosing
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateClosing);
+    NSParameterAssert(leftView);
+    NSParameterAssert(centerView);
+    
+    // Calculate final frames for the container views
+    CGRect leftViewFinalFrame = leftView.frame;
+    leftViewFinalFrame.origin.x = kGDFDrawerControllerLeftViewInitialOffset;
+    CGRect centerViewFinalFrame = self.view.bounds;
+    
+    [UIView animateWithDuration:kGDFDrawerControllerAnimationDuration
+                          delay:0
+         usingSpringWithDamping:kGDFDrawerControllerClosingAnimationSpringDamping
+          initialSpringVelocity:kGDFDrawerControllerClosingAnimationSpringInitialVelocity
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         centerView.frame = centerViewFinalFrame;
+                         leftView.frame = leftViewFinalFrame;
+                         
+                         [self setNeedsStatusBarAppearanceUpdate];
+                     }
+                     completion:^(BOOL finished) {
+                         [self didClose];
+                     }];
+}
 #pragma mark - uiviewcontroller method
 - (void)viewDidLoad {
     [super viewDidLoad];

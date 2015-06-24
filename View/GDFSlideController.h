@@ -7,9 +7,54 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef NS_ENUM(NSUInteger, GDFDrawerControllerState)
+{
+    GDFDrawerControllerStateClosed = 0,
+    GDFDrawerControllerStateOpening,
+    GDFDrawerControllerStateOpen,
+    GDFDrawerControllerStateClosing
+};
+extern const CGFloat kGDFDrawerControllerLeftViewInitialOffset;
+
+@class GDFSlideController;
+@protocol GDFSlideControllerChild <NSObject>
+@property (nonatomic,weak) GDFSlideController *sliderController;
+
+@end
+@protocol GDFSlideControllerStatus <NSObject>
+/**
+ Tells the child controller that the slide controller is about to open.
+ 
+ @param slideController The slide object that is about to open.
+ */
+- (void)slideControllerWillOpen:(GDFSlideController *)slideController;
+/**
+ Tells the child controller that the slide controller has completed the opening phase and is now open.
+ 
+ @param slideController The slide object that is now open.
+ */
+- (void)slideControllerDidOpen:(GDFSlideController *)slideController;
+/**
+ Tells the child controller that the slide controller is about to close.
+ 
+ @param slideController The slide object that is about to close.
+ */
+- (void)slideControllerWillClose:(GDFSlideController *)slideController;
+/**
+ Tells the child controller that the slide controller has completed the closing phase and is now closed.
+ 
+ @param slideController The slide object that is now closed.
+ */
+- (void)slideControllerDidClose:(GDFSlideController *)slideController;
+@end
 
 @interface GDFSlideController : UIViewController
 
-@property(nonatomic, strong, readwrite) UIViewController *leftViewController;
-@property(nonatomic, strong, readwrite) UIViewController *centerViewController;
+@property(nonatomic, strong, readwrite) UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *leftViewController;
+@property(nonatomic, strong, readwrite) UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *centerViewController;
+
+@property(nonatomic, assign) GDFDrawerControllerState drawerState;
+
+- (id)initWithLeftViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)leftViewController_
+            centerViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)centerViewController_;
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB5E3F6B1B3AC0CE0077743C /* GDFLeftTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5E3F691B3AC0CE0077743C /* GDFLeftTableCell.m */; };
+		BB5E3F6C1B3AC0CE0077743C /* GDFLeftTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB5E3F6A1B3AC0CE0077743C /* GDFLeftTableCell.xib */; };
+		BB6BB3F21B3941B60089BB7A /* LeftVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6BB3F11B3941B60089BB7A /* LeftVC.m */; };
 		BB9530171B32788800CFC0B8 /* RootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9530161B32788800CFC0B8 /* RootVC.m */; };
 		BB95301A1B3279F000CFC0B8 /* GDFBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9530191B3279F000CFC0B8 /* GDFBaseVC.m */; };
 		BB95301C1B32A1E700CFC0B8 /* title_bar_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB95301B1B32A1E700CFC0B8 /* title_bar_add@2x.png */; };
@@ -43,6 +46,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB5E3F681B3AC0CE0077743C /* GDFLeftTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDFLeftTableCell.h; sourceTree = "<group>"; };
+		BB5E3F691B3AC0CE0077743C /* GDFLeftTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDFLeftTableCell.m; sourceTree = "<group>"; };
+		BB5E3F6A1B3AC0CE0077743C /* GDFLeftTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDFLeftTableCell.xib; sourceTree = "<group>"; };
+		BB6BB3F01B3941B60089BB7A /* LeftVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftVC.h; sourceTree = "<group>"; };
+		BB6BB3F11B3941B60089BB7A /* LeftVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftVC.m; sourceTree = "<group>"; };
+		BB6BB3F31B3941F70089BB7A /* GDF.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDF.pch; sourceTree = "<group>"; };
 		BB9530151B32788800CFC0B8 /* RootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootVC.h; sourceTree = "<group>"; };
 		BB9530161B32788800CFC0B8 /* RootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootVC.m; sourceTree = "<group>"; };
 		BB9530181B3279F000CFC0B8 /* GDFBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDFBaseVC.h; sourceTree = "<group>"; };
@@ -137,6 +146,11 @@
 				BB9530191B3279F000CFC0B8 /* GDFBaseVC.m */,
 				BB9530151B32788800CFC0B8 /* RootVC.h */,
 				BB9530161B32788800CFC0B8 /* RootVC.m */,
+				BB6BB3F01B3941B60089BB7A /* LeftVC.h */,
+				BB6BB3F11B3941B60089BB7A /* LeftVC.m */,
+				BB5E3F681B3AC0CE0077743C /* GDFLeftTableCell.h */,
+				BB5E3F691B3AC0CE0077743C /* GDFLeftTableCell.m */,
+				BB5E3F6A1B3AC0CE0077743C /* GDFLeftTableCell.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -179,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				BB9F69551B2EB311000C3EB5 /* main.m */,
+				BB6BB3F31B3941F70089BB7A /* GDF.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -294,6 +309,7 @@
 				BB9F69BC1B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png in Resources */,
 				BB9F69641B2EB311000C3EB5 /* LaunchScreen.storyboard in Resources */,
 				BB9F69BB1B3181B4000C3EB5 /* NavBarIconSearchBar_blue.png in Resources */,
+				BB5E3F6C1B3AC0CE0077743C /* GDFLeftTableCell.xib in Resources */,
 				BB9F69BE1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png in Resources */,
 				BB9F69BA1B3181B4000C3EB5 /* NavBarIconSearchBar2_blue@2x.png in Resources */,
 				BB9F69B51B3181B4000C3EB5 /* NavBarIconSearch_blue.png in Resources */,
@@ -309,11 +325,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB9530171B32788800CFC0B8 /* RootVC.m in Sources */,
+				BB5E3F6B1B3AC0CE0077743C /* GDFLeftTableCell.m in Sources */,
 				BB9530241B33C93D00CFC0B8 /* GDFSlideController.m in Sources */,
 				BB9F69A91B316FF2000C3EB5 /* GDFSearchBar.m in Sources */,
 				BB9F69591B2EB311000C3EB5 /* AppDelegate.m in Sources */,
 				BB95301A1B3279F000CFC0B8 /* GDFBaseVC.m in Sources */,
 				BB9F69561B2EB311000C3EB5 /* main.m in Sources */,
+				BB6BB3F21B3941B60089BB7A /* LeftVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +439,7 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "iPhone Developer: DeNA IOSGroup (MUZ8FY28QK)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AMap";
+				GCC_PREFIX_HEADER = GDFamily/GDF.pch;
 				INFOPLIST_FILE = GDFamily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -438,6 +457,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/AMap";
+				GCC_PREFIX_HEADER = GDFamily/GDF.pch;
 				INFOPLIST_FILE = GDFamily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
