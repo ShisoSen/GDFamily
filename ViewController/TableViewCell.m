@@ -1,14 +1,14 @@
 //
-//  GDFLeftTableCell.m
+//  TableViewCell.m
 //  GDFamily
 //
-//  Created by Sicong Qian on 15/6/24.
-//  Copyright © 2015年 silverup.co. All rights reserved.
+//  Created by silver on 15/6/24.
+//  Copyright (c) 2015年 silverup.co. All rights reserved.
 //
 
-#import "GDFLeftTableCell.h"
+#import "TableViewCell.h"
 
-@implementation GDFLeftTableCell
+@implementation TableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
