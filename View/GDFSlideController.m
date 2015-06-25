@@ -82,7 +82,7 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
                      }];
 }
 
-- (void)replaceCenterViewControllerWithViewController:(UIViewController *)viewController{
+- (void)replaceCenterViewControllerWithViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)viewController{
     NSParameterAssert(self.drawerState == GDFDrawerControllerStateOpen);
     NSParameterAssert(viewController);
     NSParameterAssert(centerView);
@@ -121,6 +121,53 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
                          [self animateClosing];
                      }];
 }
+- (void)replaceLeftViewControllerWithViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)viewController{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateClosed);
+    NSParameterAssert(viewController);
+    NSParameterAssert(leftView);
+    NSParameterAssert(leftViewController);
+    
+    CGRect f = leftView.frame;
+    f.origin.x = self.view.bounds.size.width;
+    
+    [leftViewController willMoveToParentViewController:nil];
+    [UIView animateWithDuration: kGDFDrawerControllerAnimationDuration / 2
+                     animations:^{
+                         leftView.frame = f;
+                     }
+                     completion:^(BOOL finished) {
+                         // The left view controller is now out of sight
+                         
+                         // Remove the current left view controller from the container
+                         if ([leftViewController respondsToSelector:@selector(setSliderController:)]) {
+                             leftViewController.sliderController = nil;
+                         }
+                         [leftViewController.view removeFromSuperview];
+                         [leftViewController removeFromParentViewController];
+                         
+                         // Set the new left view controller
+                         leftViewController = viewController;
+                         if ([leftViewController respondsToSelector:@selector(setSliderController:)]) {
+                             leftViewController.sliderController = self;
+                         }
+                         
+                         [self willOpen];
+                         
+                         // Finally, open the drawer
+                         [self animateOpening];
+                     }];
+}
+#pragma mark - Opening the drawer
+
+- (void)open
+{
+    NSParameterAssert(self.drawerState == GDFDrawerControllerStateClosed);
+    
+    [self willOpen];
+    
+    [self animateOpening];
+}
+#pragma mark -GestureRecognizers
 - (void)addCenterViewController{
     [self addChildViewController:self.centerViewController];
     self.centerViewController.view.frame = self.view.bounds;

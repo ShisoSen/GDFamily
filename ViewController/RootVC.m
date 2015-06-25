@@ -8,6 +8,8 @@
 
 #import "RootVC.h"
 #import "GDFSearchBar.h"
+#import "ViewController.h"
+
 @interface RootVC ()
 
 @end
@@ -20,7 +22,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    button.center = self.view.center;
+    button.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:button];
+    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
 
+}
+
+-(void)buttonClick:(id)sender{
+    ViewController *vc = [[ViewController alloc]init];
+    vc.view.backgroundColor = [UIColor redColor];
+    [self.sliderController replaceLeftViewControllerWithViewController:vc];
 }
 
 - (void)didReceiveMemoryWarning {

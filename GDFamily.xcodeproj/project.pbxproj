@@ -40,6 +40,7 @@
 		BB9F69BC1B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B21B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png */; };
 		BB9F69BD1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B31B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png */; };
 		BB9F69BE1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B41B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png */; };
+		BBD75FA41B3C0F8B002B0E73 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD75FA31B3C0F8B002B0E73 /* ViewController.m */; };
 		D7B20F3D1B3AF26E00AECD72 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B20F3C1B3AF26E00AECD72 /* TableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,8 @@
 		BB9F69B21B3181B4000C3EB5 /* NavBarIconSearchBar_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearchBar_blue@2x.png"; sourceTree = "<group>"; };
 		BB9F69B31B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBarIconSearchCircle_blue.png; sourceTree = "<group>"; };
 		BB9F69B41B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearchCircle_blue@2x.png"; sourceTree = "<group>"; };
+		BBD75FA21B3C0F8B002B0E73 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BBD75FA31B3C0F8B002B0E73 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D7B20F3B1B3AF26E00AECD72 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		D7B20F3C1B3AF26E00AECD72 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +149,8 @@
 				BB6BB3F11B3941B60089BB7A /* LeftVC.m */,
 				D7B20F3B1B3AF26E00AECD72 /* TableViewCell.h */,
 				D7B20F3C1B3AF26E00AECD72 /* TableViewCell.m */,
+				BBD75FA21B3C0F8B002B0E73 /* ViewController.h */,
+				BBD75FA31B3C0F8B002B0E73 /* ViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD75FA41B3C0F8B002B0E73 /* ViewController.m in Sources */,
 				BB9530171B32788800CFC0B8 /* RootVC.m in Sources */,
 				BB9530241B33C93D00CFC0B8 /* GDFSlideController.m in Sources */,
 				BB9F69A91B316FF2000C3EB5 /* GDFSearchBar.m in Sources */,

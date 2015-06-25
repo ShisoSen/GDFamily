@@ -57,4 +57,15 @@ extern const CGFloat kGDFDrawerControllerLeftViewInitialOffset;
 
 - (id)initWithLeftViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)leftViewController_
             centerViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)centerViewController_;
+
+- (void)open;
+
+- (void)close;
+
+- (void)reloadCenterViewControllerUsingBlock:(void (^)(void))reloadBlock;
+
+- (void)replaceCenterViewControllerWithViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)viewController;
+
+- (void)replaceLeftViewControllerWithViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)viewController;
+
 @end
