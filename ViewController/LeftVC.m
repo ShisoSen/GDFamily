@@ -19,9 +19,6 @@ static const float kGDFScrollViewOffsetRange = 110.0;
     UIView *footer;
 }
 
--(void)_setup{
-    self.view.backgroundColor = [UIColor redColor];
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -67,7 +64,7 @@ static const float kGDFScrollViewOffsetRange = 110.0;
     header.alpha = 0.0f;
     [self.view addSubview:header];
     UIButton *h_bt1 = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    h_bt1.frame = CGRectMake(s.width+kGDFDrawerControllerLeftViewInitialOffset-40, header.frame.size.height-40, 30, 30);
+    h_bt1.frame = CGRectMake(s.width-60-40, header.frame.size.height-40, 30, 30);
     [self.view addSubview:h_bt1];
     
     footer = [[UIView alloc]initWithFrame:CGRectMake(0, s.height-44, s.width, 44)];
@@ -92,6 +89,7 @@ static const float kGDFScrollViewOffsetRange = 110.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     lg;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.sliderController open];
 }
 #pragma mark -UITableView Datasource
 

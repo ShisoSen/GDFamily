@@ -8,8 +8,6 @@
 
 #import "GDFSlideController.h"
 
-const CGFloat kGDFDrawerControllerLeftViewInitialOffset = -60.0f;
-static CGFloat kGDFDrawerControllerDrawerDepth = 260.0f;
 static const NSTimeInterval kGDFDrawerControllerAnimationDuration = 0.5;
 static const CGFloat kGDFDrawerControllerOpeningAnimationSpringDamping = 0.7f;
 static const CGFloat kGDFDrawerControllerOpeningAnimationSpringInitialVelocity = 0.1f;
@@ -31,8 +29,7 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
     
     
 }
-
-@synthesize leftViewController,centerViewController;
+@synthesize leftViewController,centerViewController,LeftViewInitialOffset,ControllerDrawerDepth,enablePanGesture;
 
 - (id)initWithLeftViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)leftViewController_
             centerViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)centerViewController_{
@@ -44,8 +41,10 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
     if (self) {
         leftViewController = leftViewController_;
         centerViewController = centerViewController_;
-        
-        kGDFDrawerControllerDrawerDepth = [UIScreen mainScreen].bounds.size.width + kGDFDrawerControllerLeftViewInitialOffset;
+        //initial offset
+        LeftViewInitialOffset = -60.0f;
+        ControllerDrawerDepth = [UIScreen mainScreen].bounds.size.width + LeftViewInitialOffset;
+        enablePanGesture = YES;
         
         if ([leftViewController respondsToSelector:@selector(setSliderController:)]) {
             leftViewController.sliderController = self;
@@ -55,6 +54,10 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
         }
     }
     return self;
+}
+-(void)setLeftViewInitialOffset:(CGFloat)LeftViewInitialOffset_{
+    LeftViewInitialOffset = LeftViewInitialOffset_;
+    ControllerDrawerDepth = [UIScreen mainScreen].bounds.size.width + LeftViewInitialOffset;
 }
 #pragma mark - Reloading/Replacing the center view controller
 
@@ -176,11 +179,13 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
 }
 - (void)setupGestureRecognizers{
     tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognized:)];
-    panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
-    panGestureRecognizer.maximumNumberOfTouches = 1;
-    panGestureRecognizer.delegate = self;
-    
-    [centerView addGestureRecognizer:panGestureRecognizer];
+    if (enablePanGesture) {
+        panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
+        panGestureRecognizer.maximumNumberOfTouches = 1;
+        panGestureRecognizer.delegate = self;
+        
+        [centerView addGestureRecognizer:panGestureRecognizer];
+    }
 }
 - (void)tapGestureRecognized:(UITapGestureRecognizer *)tapGestureRecognizer_{
     if (tapGestureRecognizer_.state == UIGestureRecognizerStateEnded) {
@@ -190,9 +195,12 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
 - (void)removeClosingGestureRecognizers
 {
     NSParameterAssert(centerView);
-    NSParameterAssert(panGestureRecognizer);
-    
-    [centerView removeGestureRecognizer:tapGestureRecognizer];
+    if (enablePanGesture) {
+        NSParameterAssert(panGestureRecognizer);
+    }
+    if (tapGestureRecognizer) {
+        [centerView removeGestureRecognizer:tapGestureRecognizer];
+    }
 }
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     NSParameterAssert([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]);
@@ -232,24 +240,24 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
                 delta = location.x - panGestureStartLocation.x;
             }
             else if (self.drawerState == GDFDrawerControllerStateClosing) {
-                delta = kGDFDrawerControllerDrawerDepth - (panGestureStartLocation.x - location.x);
+                delta = ControllerDrawerDepth - (panGestureStartLocation.x - location.x);
             }
             
             CGRect l = leftView.frame;
             CGRect c = centerView.frame;
-            if (delta > kGDFDrawerControllerDrawerDepth) {
+            if (delta > ControllerDrawerDepth) {
                 l.origin.x = 0.0f;
-                c.origin.x = kGDFDrawerControllerDrawerDepth;
+                c.origin.x = ControllerDrawerDepth;
             }
             else if (delta < 0.0f) {
-                l.origin.x = kGDFDrawerControllerLeftViewInitialOffset;
+                l.origin.x = LeftViewInitialOffset;
                 c.origin.x = 0.0f;
             }
             else {
                 // While the centerView can move up to kGDFDrawerControllerDrawerDepth points, to achieve a parallax effect
-                // the leftView has move no more than kGDFDrawerControllerLeftViewInitialOffset points
-                l.origin.x = kGDFDrawerControllerLeftViewInitialOffset
-                - (delta * kGDFDrawerControllerLeftViewInitialOffset) / kGDFDrawerControllerDrawerDepth;
+                // the leftView has move no more than LeftViewInitialOffset points
+                l.origin.x = LeftViewInitialOffset
+                - (delta * LeftViewInitialOffset) / ControllerDrawerDepth;
                 
                 c.origin.x = delta;
             }
@@ -264,7 +272,7 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
             
             if (self.drawerState == GDFDrawerControllerStateOpening) {
                 CGFloat centerViewLocation = centerView.frame.origin.x;
-                if (centerViewLocation == kGDFDrawerControllerDrawerDepth) {
+                if (centerViewLocation == ControllerDrawerDepth) {
                     // Open the drawer without animation, as it has already being dragged in its final position
                     [self setNeedsStatusBarAppearanceUpdate];
                     [self didOpen];
@@ -318,9 +326,12 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
 - (void)addClosingGestureRecognizers
 {
     NSParameterAssert(centerView);
-    NSParameterAssert(panGestureRecognizer);
-    
-    [centerView addGestureRecognizer:tapGestureRecognizer];
+    if (enablePanGesture) {
+        NSParameterAssert(panGestureRecognizer);
+    }
+    if (tapGestureRecognizer) {
+        [centerView addGestureRecognizer:tapGestureRecognizer];
+    }
 }
 #pragma mark -SlideControllerStatus
 - (void)willOpen
@@ -336,7 +347,7 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
     
     // Position the left view
     CGRect f = self.view.bounds;
-    f.origin.x = kGDFDrawerControllerLeftViewInitialOffset;
+    f.origin.x = LeftViewInitialOffset;
     NSParameterAssert(f.origin.x < 0.0f);
     leftView.frame = f;
     
@@ -444,7 +455,7 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
     // Calculate the final frames for the container views
     CGRect leftViewFinalFrame = self.view.bounds;
     CGRect centerViewFinalFrame = self.view.bounds;
-    centerViewFinalFrame.origin.x = kGDFDrawerControllerDrawerDepth;
+    centerViewFinalFrame.origin.x = ControllerDrawerDepth;
     
     [UIView animateWithDuration:kGDFDrawerControllerAnimationDuration
                           delay:0
@@ -469,7 +480,7 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
     
     // Calculate final frames for the container views
     CGRect leftViewFinalFrame = leftView.frame;
-    leftViewFinalFrame.origin.x = kGDFDrawerControllerLeftViewInitialOffset;
+    leftViewFinalFrame.origin.x = LeftViewInitialOffset;
     CGRect centerViewFinalFrame = self.view.bounds;
     
     [UIView animateWithDuration:kGDFDrawerControllerAnimationDuration

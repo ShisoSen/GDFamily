@@ -14,7 +14,6 @@ typedef NS_ENUM(NSUInteger, GDFDrawerControllerState)
     GDFDrawerControllerStateOpen,
     GDFDrawerControllerStateClosing
 };
-extern const CGFloat kGDFDrawerControllerLeftViewInitialOffset;
 
 @class GDFSlideController;
 @protocol GDFSlideControllerChild <NSObject>
@@ -54,6 +53,9 @@ extern const CGFloat kGDFDrawerControllerLeftViewInitialOffset;
 @property(nonatomic, strong, readwrite) UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *centerViewController;
 
 @property(nonatomic, assign) GDFDrawerControllerState drawerState;
+@property(nonatomic, assign) CGFloat LeftViewInitialOffset;
+@property(nonatomic, assign) CGFloat ControllerDrawerDepth;
+@property(nonatomic, assign) BOOL enablePanGesture;
 
 - (id)initWithLeftViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)leftViewController_
             centerViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)centerViewController_;

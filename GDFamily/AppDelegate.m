@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RootVC.h"
 #import "LeftVC.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,9 +21,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    ViewController *vc = [[ViewController alloc]init];
+    vc.view.backgroundColor = [UIColor redColor];
     LeftVC *left = [[LeftVC alloc]init];
+    GDFSlideController *leftCenter = [[GDFSlideController alloc]initWithLeftViewController:vc centerViewController:left];
+    leftCenter.LeftViewInitialOffset = -120;
+    leftCenter.enablePanGesture = NO;
     RootVC *center = [[RootVC alloc]init];
-    GDFSlideController *rootVC = [[GDFSlideController alloc]initWithLeftViewController:left centerViewController:center];
+    GDFSlideController *rootVC = [[GDFSlideController alloc]initWithLeftViewController:leftCenter centerViewController:center];
+    rootVC.LeftViewInitialOffset = -60;
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootVC];
     [nav setNavigationBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
