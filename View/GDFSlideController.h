@@ -45,6 +45,8 @@ typedef NS_ENUM(NSUInteger, GDFDrawerControllerState)
  @param slideController The slide object that is now closed.
  */
 - (void)slideControllerDidClose:(GDFSlideController *)slideController;
+
+- (void)slideControllerTapClose:(GDFSlideController *)slideController;
 @end
 
 @interface GDFSlideController : UIViewController
@@ -54,7 +56,7 @@ typedef NS_ENUM(NSUInteger, GDFDrawerControllerState)
 
 @property(nonatomic, assign) GDFDrawerControllerState drawerState;
 @property(nonatomic, assign) CGFloat LeftViewInitialOffset;
-@property(nonatomic, assign) CGFloat ControllerDrawerDepth;
+@property(nonatomic, assign, readonly) CGFloat ControllerDrawerDepth;
 @property(nonatomic, assign) BOOL enablePanGesture;
 
 - (id)initWithLeftViewController:(UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *)leftViewController_

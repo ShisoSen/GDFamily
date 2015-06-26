@@ -41,6 +41,7 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
     if (self) {
         leftViewController = leftViewController_;
         centerViewController = centerViewController_;
+        
         //initial offset
         LeftViewInitialOffset = -60.0f;
         ControllerDrawerDepth = [UIScreen mainScreen].bounds.size.width + LeftViewInitialOffset;
@@ -189,6 +190,12 @@ static const CGFloat kGDFDrawerControllerClosingAnimationSpringInitialVelocity =
 }
 - (void)tapGestureRecognized:(UITapGestureRecognizer *)tapGestureRecognizer_{
     if (tapGestureRecognizer_.state == UIGestureRecognizerStateEnded) {
+        if ([centerViewController respondsToSelector:@selector(slideControllerTapClose:)]) {
+            [centerViewController slideControllerTapClose:self];
+        }
+        if ([leftViewController respondsToSelector:@selector(slideControllerTapClose:)]) {
+            [leftViewController slideControllerTapClose:self];
+        }
         [self close];
     }
 }

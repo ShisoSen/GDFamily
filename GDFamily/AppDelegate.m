@@ -28,6 +28,7 @@
     leftCenter.LeftViewInitialOffset = -120;
     leftCenter.enablePanGesture = NO;
     RootVC *center = [[RootVC alloc]init];
+    center.childCenter = left;
     GDFSlideController *rootVC = [[GDFSlideController alloc]initWithLeftViewController:leftCenter centerViewController:center];
     rootVC.LeftViewInitialOffset = -60;
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:rootVC];

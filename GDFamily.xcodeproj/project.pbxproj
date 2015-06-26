@@ -41,6 +41,9 @@
 		BB9F69BD1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B31B3181B4000C3EB5 /* NavBarIconSearchCircle_blue.png */; };
 		BB9F69BE1B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB9F69B41B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png */; };
 		BBD75FA41B3C0F8B002B0E73 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD75FA31B3C0F8B002B0E73 /* ViewController.m */; };
+		BBD75FA71B3CFF94002B0E73 /* UIView+MaterialDesign.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD75FA61B3CFF94002B0E73 /* UIView+MaterialDesign.m */; };
+		BBD75FAA1B3D018D002B0E73 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD75FA91B3D018D002B0E73 /* UIImageView+LBBlurredImage.m */; };
+		BBD75FAC1B3D0244002B0E73 /* example.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD75FAB1B3D0244002B0E73 /* example.png */; };
 		D7B20F3D1B3AF26E00AECD72 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B20F3C1B3AF26E00AECD72 /* TableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +93,11 @@
 		BB9F69B41B3181B4000C3EB5 /* NavBarIconSearchCircle_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBarIconSearchCircle_blue@2x.png"; sourceTree = "<group>"; };
 		BBD75FA21B3C0F8B002B0E73 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BBD75FA31B3C0F8B002B0E73 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BBD75FA51B3CFF94002B0E73 /* UIView+MaterialDesign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MaterialDesign.h"; sourceTree = "<group>"; };
+		BBD75FA61B3CFF94002B0E73 /* UIView+MaterialDesign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MaterialDesign.m"; sourceTree = "<group>"; };
+		BBD75FA81B3D018D002B0E73 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		BBD75FA91B3D018D002B0E73 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
+		BBD75FAB1B3D0244002B0E73 /* example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example.png; sourceTree = "<group>"; };
 		D7B20F3B1B3AF26E00AECD72 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		D7B20F3C1B3AF26E00AECD72 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -209,6 +217,10 @@
 		BB9F69A61B316FBF000C3EB5 /* unitView */ = {
 			isa = PBXGroup;
 			children = (
+				BBD75FA81B3D018D002B0E73 /* UIImageView+LBBlurredImage.h */,
+				BBD75FA91B3D018D002B0E73 /* UIImageView+LBBlurredImage.m */,
+				BBD75FA51B3CFF94002B0E73 /* UIView+MaterialDesign.h */,
+				BBD75FA61B3CFF94002B0E73 /* UIView+MaterialDesign.m */,
 				BB9F69A71B316FF2000C3EB5 /* GDFSearchBar.h */,
 				BB9F69A81B316FF2000C3EB5 /* GDFSearchBar.m */,
 				BB9530221B33C93D00CFC0B8 /* GDFSlideController.h */,
@@ -221,6 +233,7 @@
 		BB9F69AA1B3181B4000C3EB5 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				BBD75FAB1B3D0244002B0E73 /* example.png */,
 				BB95301B1B32A1E700CFC0B8 /* title_bar_add@2x.png */,
 				BB9F69AB1B3181B4000C3EB5 /* NavBarIconSearch_blue.png */,
 				BB9F69AC1B3181B4000C3EB5 /* NavBarIconSearch_blue@2x.png */,
@@ -298,6 +311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBD75FAC1B3D0244002B0E73 /* example.png in Resources */,
 				BB9F69A51B2ECA31000C3EB5 /* AMap.bundle in Resources */,
 				BB9F69B61B3181B4000C3EB5 /* NavBarIconSearch_blue@2x.png in Resources */,
 				BB9F69B91B3181B4000C3EB5 /* NavBarIconSearchBar2_blue.png in Resources */,
@@ -322,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD75FA41B3C0F8B002B0E73 /* ViewController.m in Sources */,
+				BBD75FAA1B3D018D002B0E73 /* UIImageView+LBBlurredImage.m in Sources */,
 				BB9530171B32788800CFC0B8 /* RootVC.m in Sources */,
 				BB9530241B33C93D00CFC0B8 /* GDFSlideController.m in Sources */,
 				BB9F69A91B316FF2000C3EB5 /* GDFSearchBar.m in Sources */,
@@ -330,6 +345,7 @@
 				D7B20F3D1B3AF26E00AECD72 /* TableViewCell.m in Sources */,
 				BB9F69561B2EB311000C3EB5 /* main.m in Sources */,
 				BB6BB3F21B3941B60089BB7A /* LeftVC.m in Sources */,
+				BBD75FA71B3CFF94002B0E73 /* UIView+MaterialDesign.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

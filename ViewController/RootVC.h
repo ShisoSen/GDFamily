@@ -11,4 +11,5 @@
 @interface RootVC :GDFBaseVC <GDFSlideControllerChild,GDFSlideControllerStatus>
 
 @property (nonatomic,weak) GDFSlideController *sliderController;
+@property (nonatomic,weak) UIViewController<GDFSlideControllerChild,GDFSlideControllerStatus> *childCenter;
 @end

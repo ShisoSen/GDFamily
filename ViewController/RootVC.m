@@ -55,4 +55,11 @@
 - (void)slideControllerDidClose:(GDFSlideController *)slideController{
     lg;
 }
+- (void)slideControllerTapClose:(GDFSlideController *)slideController{
+    lg;
+    
+    if (self.childCenter.sliderController.drawerState == GDFDrawerControllerStateOpen) {
+        [self.childCenter.sliderController close];
+    }
+}
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "LeftVC.h"
+#import "UIImageView+LBBlurredImage.h"
+
 static const float kGDFScrollViewOffsetRange = 110.0;
 
 @interface LeftVC ()<UITableViewDataSource, UITableViewDelegate>
@@ -23,8 +25,12 @@ static const float kGDFScrollViewOffsetRange = 110.0;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     CGSize s = self.view.frame.size;
+    UIImageView *backgroundView = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    backgroundView.image = [UIImage imageNamed:@"example"];
+    [self.view addSubview:backgroundView];
 
     table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, s.width, s.height-44) style:UITableViewStylePlain];
+    table.backgroundColor = [UIColor clearColor];
     table.delegate = self;
     table.dataSource = self;
     table.tableHeaderView = ({
@@ -68,7 +74,7 @@ static const float kGDFScrollViewOffsetRange = 110.0;
     [self.view addSubview:h_bt1];
     
     footer = [[UIView alloc]initWithFrame:CGRectMake(0, s.height-44, s.width, 44)];
-    footer.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    footer.backgroundColor = [UIColor clearColor];
     [self.view addSubview:footer];
 }
 
@@ -84,7 +90,7 @@ static const float kGDFScrollViewOffsetRange = 110.0;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:17];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionIndex{
-    return 10.0;
+    return 0.0;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     lg;
@@ -92,7 +98,6 @@ static const float kGDFScrollViewOffsetRange = 110.0;
     [self.sliderController open];
 }
 #pragma mark -UITableView Datasource
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 54;
