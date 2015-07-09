@@ -1,0 +1,6 @@
+1. header doc 生成：
+- https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/HeaderDoc/tags/tags.html
+
+- headerdoc2html -o outputDirectory inputDirectory
+
+- gatherheaderdoc outputDirectory

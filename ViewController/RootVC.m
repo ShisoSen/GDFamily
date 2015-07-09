@@ -9,6 +9,7 @@
 #import "RootVC.h"
 #import "GDFSearchBar.h"
 #import "ViewController.h"
+#import "BDMapVC.h"
 
 @interface RootVC ()
 
@@ -22,13 +23,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    BDMapVC *bdmap = [[BDMapVC alloc]init];
+    bdmap.view.frame = self.view.frame;
+    [self.view addSubview:bdmap.view];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
     button.center = self.view.center;
     button.backgroundColor = [UIColor blueColor];
     [self.view addSubview:button];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-
+    
 }
 
 -(void)buttonClick:(id)sender{
