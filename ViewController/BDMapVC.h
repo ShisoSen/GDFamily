@@ -11,4 +11,9 @@
 
 @interface BDMapVC : UIViewController
 @property (nonatomic,copy) BMKMapView* mapView;
+
+-(void)startLocModeFollow;
+-(void)startLocModeNone;
+-(void)startLocModeFollowWithHeading;
+-(void)addCurrentLocPoint;
 @end

@@ -133,7 +133,7 @@ static const float kGDFScrollViewOffsetRange = 110.0;
     return cell;
 }
 #pragma mark -scrollView delegate
--(void)scrollViewDidScroll:(nonnull UIScrollView *)scrollView{
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     header.alpha = scrollView.contentOffset.y/kGDFScrollViewOffsetRange;
     NSLog(@"header alpha: %f",header.alpha);
 }

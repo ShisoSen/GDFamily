@@ -15,7 +15,7 @@
 @end
 
 @implementation BDMapVC{
-    BMKLocationService* lcoService;
+    BMKLocationService* locService;
 }
 @synthesize mapView;
 
@@ -45,17 +45,43 @@
     [BMKLocationService setLocationDistanceFilter:100.f];
     
     //初始化BMKLocationService
-    lcoService = [[BMKLocationService alloc]init];
-    lcoService.delegate = self;
+    locService = [[BMKLocationService alloc]init];
+    locService.delegate = self;
     //启动LocationService
-    [lcoService startUserLocationService];
+    [locService startUserLocationService];
+}
+#pragma mark -open api
+-(void)startLocModeFollow{
+    mapView.showsUserLocation = NO;
+    mapView.userTrackingMode = BMKUserTrackingModeFollow;
+    mapView.showsUserLocation = YES;
+}
+-(void)startLocModeNone{
+    mapView.showsUserLocation = NO;
+    mapView.userTrackingMode = BMKUserTrackingModeNone;
+    mapView.showsUserLocation = YES;
+}
+-(void)startLocModeFollowWithHeading{
+    mapView.showsUserLocation = NO;
+    mapView.userTrackingMode = BMKUserTrackingModeFollowWithHeading;
+    mapView.showsUserLocation = YES;
+}
+-(void)addCurrentLocPoint{
+    [self _addLocPoint:locService.userLocation.location.coordinate];
+}
+#pragma mark -private logic
+-(void)_addLocPoint:(CLLocationCoordinate2D) coor{
+    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+    annotation.coordinate = coor;
+    annotation.title = @"you are here.";
+    [mapView addAnnotation:annotation];
 }
 #pragma mark -view controller
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view = mapView;
-    mapView.userTrackingMode = BMKUserTrackingModeFollow;
-    mapView.showsUserLocation = YES;//显示定位图层
+    //default loc mode.
+    [self startLocModeNone];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -143,6 +169,8 @@
 }
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
     NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    [mapView setCenterCoordinate:userLocation.location.coordinate];
+    
     [mapView updateLocationData:userLocation];
 }
 @end
